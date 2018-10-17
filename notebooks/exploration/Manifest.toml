@@ -1,3 +1,15 @@
+[[ArgCheck]]
+deps = ["Random", "Test"]
+git-tree-sha1 = "9e3bff61bc46d3420d903b53ad07f85325fddc28"
+uuid = "dce04be8-c92d-5529-be00-80e4d2c0e197"
+version = "1.0.0"
+
+[[BARON]]
+deps = ["Compat", "MathProgBase"]
+path = "/home/twan/.julia/dev/BARON"
+uuid = "2e2ca445-9e14-5b13-8677-4410f177f82b"
+version = "0.4.3+"
+
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
@@ -31,6 +43,12 @@ git-tree-sha1 = "b974e164358fea753ef853ce7bad97afec15bb80"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.5.1"
 
+[[Crayons]]
+deps = ["Pkg", "Test"]
+git-tree-sha1 = "3017c662a988bcb8a3f43306a793617c6524d476"
+uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
+version = "1.0.0"
+
 [[DataStructures]]
 deps = ["InteractiveUtils", "OrderedCollections", "REPL", "Random", "Serialization", "Test"]
 git-tree-sha1 = "8fc6e166e24fda04b2b648d4260cdad241788c54"
@@ -41,6 +59,12 @@ version = "0.14.0"
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
+[[DefaultApplication]]
+deps = ["Pkg", "Test"]
+git-tree-sha1 = "ae397bb81e462139fd1701e93ae10713169df02c"
+uuid = "3f0dd361-4fe0-5fc6-8523-80b14ec94d85"
+version = "0.1.2"
+
 [[DelimitedFiles]]
 deps = ["Mmap"]
 uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
@@ -48,6 +72,12 @@ uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 [[Distributed]]
 deps = ["LinearAlgebra", "Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+
+[[DocStringExtensions]]
+deps = ["LibGit2", "Markdown", "Pkg", "Test"]
+git-tree-sha1 = "a016e0bfe98a748c4488e2248c2ef4c67d6fdd35"
+uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+version = "0.5.0"
 
 [[FixedPointNumbers]]
 deps = ["Pkg", "Test"]
@@ -100,6 +130,12 @@ version = "0.4.4"
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
+[[MathProgBase]]
+deps = ["Compat"]
+git-tree-sha1 = "3bf2e534e635df810e5f4b4f1a8b6de9004a0d53"
+uuid = "fdba3010-5040-5b88-9595-932c9decdf73"
+version = "0.7.7"
+
 [[Measures]]
 deps = ["Pkg", "Test"]
 git-tree-sha1 = "ddfd6d13e330beacdde2c80de27c1c671945e7d9"
@@ -126,6 +162,18 @@ deps = ["Pkg", "Random", "Serialization", "Test"]
 git-tree-sha1 = "85619a3f3e17bb4761fe1b1fd47f0e979f964d5b"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.0.2"
+
+[[PGFPlotsX]]
+deps = ["ArgCheck", "Crayons", "DataStructures", "DefaultApplication", "DocStringExtensions", "MacroTools", "Missings", "Parameters", "Pkg", "Requires", "StatsBase", "Test", "Unicode"]
+git-tree-sha1 = "39ef8f01ee8a5c8911f38062717626062bae25fd"
+uuid = "8314cec4-20b6-5062-9cdb-752b83310925"
+version = "0.3.2"
+
+[[Parameters]]
+deps = ["Markdown", "OrderedCollections", "Pkg", "REPL", "Test"]
+git-tree-sha1 = "40f540ec96e50c0b2b9efdb11b5e4d0c63f90923"
+uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+version = "0.10.1"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
