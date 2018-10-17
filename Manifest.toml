@@ -1,6 +1,8 @@
 [[BARON]]
 deps = ["Compat", "MathProgBase"]
-path = "/home/twan/.julia/dev/BARON"
+git-tree-sha1 = "fe9278444e7e343c92429e457207497325e27db5"
+repo-rev = "master"
+repo-url = "https://github.com/joehuchette/BARON.jl.git"
 uuid = "2e2ca445-9e14-5b13-8677-4410f177f82b"
 version = "0.4.3+"
 
