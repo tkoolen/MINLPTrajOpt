@@ -1,7 +1,6 @@
 [deps]
+AmplNLWriter = "7c4d4715-977e-5154-bfe0-e096adeac482"
 BARON = "2e2ca445-9e14-5b13-8677-4410f177f82b"
+CouenneNL = "5724587f-3074-5673-b62c-b97e3475008a"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 PGFPlotsX = "8314cec4-20b6-5062-9cdb-752b83310925"
-Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
-PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
