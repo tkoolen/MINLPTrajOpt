@@ -1,7 +1,7 @@
 N = 40
-θ0 = -0.1
+θ0 = 0.1
 θd0 = 0.0
 solver = BaronSolver(Base.Iterators.Pairs(:threads=>20))
 status = Optimal
-solvetime = 27.0
+solvetime = 14.0
 

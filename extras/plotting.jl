@@ -9,7 +9,7 @@ function timeplot(t, x; ylabel)
             ymajorgrids,
             enlargelimits=false,
             enlarge_y_limits,
-            xlabel=L"$t$ [s]",
+            xlabel=L"$t$ (s)",
             ylabel=ylabel
         },
         Plot(Table([t, x]))
@@ -32,7 +32,13 @@ function piticks!(p, pifrac::Rational; axis::Symbol)
             L"$0$"
         else
             frac = pifrac * i
-            frac == 1 ? L"$\pi$" : latexstring(frac_to_latex(pifrac * i) * "\\pi")
+            if frac == 1
+                L"$\pi$"
+            elseif frac.den == 1
+                latexstring("$(frac.num) \\pi")
+            else
+                latexstring(frac_to_latex(pifrac * i) * "\\pi")
+            end
         end
     end
     ticks = pifracrange * pifrac * π

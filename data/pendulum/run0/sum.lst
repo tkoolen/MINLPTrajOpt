@@ -61,26 +61,27 @@
        iisorder       =      -1
        threads        =      20
 ===========================================================================
- Starting solution is feasible with a value of     1869.70433707     
  Doing local search
+ Preprocessing found feasible solution with value  2945.63620457     
  Solving bounding LP
  Starting multi-start local search
+ Preprocessing found feasible solution with value  2646.27218817     
  Done with local search
 ===========================================================================
   Iteration    Open nodes         Time (s)    Lower bound      Upper bound
-          1             1             2.00      0.00000         1869.70    
-        915             0            27.00     1869.52          1869.70    
+          1             1             5.00      0.00000         2646.27    
+        237             0            14.00     2646.01          2646.27    
 
  Cleaning up
 
                          *** Normal completion ***            
 
- Wall clock time:                    27.00
- Total CPU time used:                26.97
+ Wall clock time:                    14.00
+ Total CPU time used:                14.04
 
- Total no. of BaR iterations:     915
- Best solution found at node:      -2
- Max. no. of nodes in memory:      19
+ Total no. of BaR iterations:     237
+ Best solution found at node:     117
+ Max. no. of nodes in memory:       5
  
  All done
 ===========================================================================
