@@ -2,12 +2,13 @@ using PGFPlotsX
 using LaTeXStrings
 PGFPlotsX.latexengine!(PGFPlotsX.PDFLATEX)
 
-function timeplot(t, x; ylabel)
+function timeplot(t, x; ylabel, tmin=minimum(t), tmax=maximum(t))
     @pgf Axis(
         {
             xmajorgrids,
             ymajorgrids,
-            enlargelimits=false,
+            xmin=tmin,
+            xmax=tmax,
             enlarge_y_limits,
             xlabel=L"$t$ (s)",
             ylabel=ylabel

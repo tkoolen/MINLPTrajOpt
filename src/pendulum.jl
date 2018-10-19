@@ -5,25 +5,36 @@
     b::Float64 = 0.0#0.1
 end
 
+
 struct PendulumSwingUpProblem
     parameters::PendulumParameters
     model::JuMP.Model
+    Δt::Vector{JuMP.Variable}
     sΔθ::Vector{JuMP.Variable}
     cΔθ::Vector{JuMP.Variable}
     Δθ::Vector{JuMP.Variable}
     sθ::Vector{JuMP.Variable}
     cθ::Vector{JuMP.Variable}
-    θd::Vector{JuMP.GenericAffExpr{Float64,Variable}}
+    θd::Vector{JuMP.Variable}
     θdd::Vector{JuMP.Variable}
     τ::Vector{JuMP.Variable}
 
     function PendulumSwingUpProblem(parameters::PendulumParameters, x0, solver;
             τmax::Number, # maximum torque
             N::Integer, # number of integration steps
-            Δt::Number, # time step
+            Δtmin::Number, # min time step
+            Δtmax::Number, # max time step
+            T::Number = N * Δtmax, # final time
             Δθmax::Number = 0.5
         )
         model = Model(solver=solver)
+
+        # Time step settings
+        @assert Δtmax >= Δtmin
+        fixedstep = Δtmin == Δtmax
+        if fixedstep
+            T == N * Δtmax || throw(ArgumentError())
+        end
 
         # Initial state
         θ0, θd0 = x0
@@ -31,17 +42,28 @@ struct PendulumSwingUpProblem
         θdprev = θd0
 
         # Variable / expression vectors
+        Δt = Vector{JuMP.Variable}(undef, N)
         sΔθ = Vector{JuMP.Variable}(undef, N)
         cΔθ = Vector{JuMP.Variable}(undef, N)
         Δθ = Vector{JuMP.Variable}(undef, N)
         sθ = Vector{JuMP.Variable}(undef, N)
         cθ = Vector{JuMP.Variable}(undef, N)
-        θd = Vector{JuMP.GenericAffExpr{Float64,Variable}}(undef, N)
+        θd = Vector{JuMP.Variable}(undef, N)
         θdd = Vector{JuMP.Variable}(undef, N)
         τ = Vector{JuMP.Variable}(undef, N)
 
-        # Add stages
         for i = 1 : N
+            # Time steps
+            Δt[i] = @variable model basename="Δt_$i"
+            if fixedstep
+                JuMP.fix(Δt[i], Δtmin)
+                Δti = Δtmin
+            else
+                JuMP.setlowerbound(Δt[i], Δtmin)
+                JuMP.setupperbound(Δt[i], Δtmax)
+                Δti = Δt[i]
+            end
+
             # Kinematics delta
             sΔθ[i], cΔθ[i] = sincosvar(model, "Δθ_$i", θmax=Δθmax, normconstraint=false)
             Δθ[i] = sΔθ[i] # first-order approximation
@@ -53,9 +75,10 @@ struct PendulumSwingUpProblem
             sθprev, cθprev = sθ[i], cθ[i]
 
             # Velocity, acceleration
-            θd[i] = @expression model Δθ[i] / Δt
+            θd[i] = @variable model basename="θd_$i"
+            @constraint model Δti * θd[i] == Δθ[i]
             θdd[i] = @variable model basename="θdd_$i"
-            @constraint model θdd[i] * Δt == θd[i] - θdprev
+            @constraint model Δti * θdd[i] == θd[i] - θdprev
             θdprev = θd[i]
 
             # Torque
@@ -66,10 +89,14 @@ struct PendulumSwingUpProblem
             # Dynamics
             M = parameters.m * parameters.l^2
             mgl = parameters.m * parameters.g * parameters.l
-            b_over_Δt = parameters.b / Δt
-            c = @NLexpression model b_over_Δt * Δθ[i] + mgl * sθ[i] # want to use b * θdi, but JuMP won't let me.
+            c = @NLexpression model parameters.b * θd[i] + mgl * sθ[i]
             @NLconstraint model M * θdd[i] + c == τ[i]
         end
+
+        # Total time constraint
+        # if !fixedstep
+        #     @constraint model sum(Δt) == T
+        # end
 
         # Final state constraint
         θf = π
@@ -79,8 +106,9 @@ struct PendulumSwingUpProblem
         @constraint model θd[N] == θdf
 
         # Set objective
-        @objective model Min τ ⋅ τ
+        # @objective model Min τ ⋅ τ
+        @objective model Min sum(Δt)
 
-        new(parameters, model, sΔθ, cΔθ, Δθ, sθ, cθ, θd, θdd, τ)
+        new(parameters, model, Δt, sΔθ, cΔθ, Δθ, sθ, cθ, θd, θdd, τ)
     end
 end
