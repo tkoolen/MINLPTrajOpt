@@ -1,3 +1,16 @@
+module Pendulum
+
+export
+    PendulumParameters,
+    MinEffort,
+    MinTime,
+    PendulumSwingUpProblem
+
+using JuMP
+using LinearAlgebra
+using Parameters
+using ..MINLPTrajOpt: sincosvar
+
 @with_kw struct PendulumParameters
     m::Float64 = 1.0
     l::Float64 = 2.0
@@ -5,6 +18,10 @@
     b::Float64 = 0.0#0.1
 end
 
+abstract type ObjectiveType end
+
+struct MinEffort <: ObjectiveType end
+struct MinTime <: ObjectiveType end
 
 struct PendulumSwingUpProblem
     parameters::PendulumParameters
@@ -24,8 +41,9 @@ struct PendulumSwingUpProblem
             N::Integer, # number of integration steps
             Δtmin::Number, # min time step
             Δtmax::Number, # max time step
-            T::Number = N * Δtmax, # final time
-            Δθmax::Number = 0.5
+            objectivetype::ObjectiveType,
+            T::Union{Number, Nothing} = objectivetype isa MinTime ? nothing : N * Δtmax, # final time
+            Δθmax::Number = 0.5, # max angle change during one integration time step (to control badness of small-angle approximation)
         )
         model = Model(solver=solver)
 
@@ -94,9 +112,9 @@ struct PendulumSwingUpProblem
         end
 
         # Total time constraint
-        # if !fixedstep
-        #     @constraint model sum(Δt) == T
-        # end
+        if !fixedstep && T !== nothing
+            @constraint model sum(Δt) == T
+        end
 
         # Final state constraint
         θf = π
@@ -105,10 +123,17 @@ struct PendulumSwingUpProblem
         @constraint model cθ[N] == cos(θf)
         @constraint model θd[N] == θdf
 
-        # Set objective
-        # @objective model Min τ ⋅ τ
-        @objective model Min sum(Δt)
+        # Objective
+        if objectivetype isa MinEffort
+            @objective model Min τ ⋅ τ
+        elseif objectivetype isa MinTime
+            @objective model Min sum(Δt)
+        else
+            throw(ArgumentError("Objective type not recognized"))
+        end
 
         new(parameters, model, Δt, sΔθ, cΔθ, Δθ, sθ, cθ, θd, θdd, τ)
     end
+end
+
 end
