@@ -68,18 +68,19 @@
  Done with local search
 ===========================================================================
   Iteration    Open nodes         Time (s)    Lower bound      Upper bound
-          1             1             1.00      0.00000         8.74465    
+          1             1             2.00      0.00000         8.74465    
 *         9             3             4.00      0.00000         6.68138    
-        994            51            34.00     0.107661E-02     6.68138    
-       2347            25            64.00     0.721910         6.68138    
-       3587             0            94.00     6.68072          6.68138    
+        955            56            34.00     0.107661E-02     6.68138    
+       2302            27            64.00     0.491748         6.68138    
+       3500             7            94.00     2.65138          6.68138    
+       3587             0            97.00     6.68072          6.68138    
 
  Cleaning up
 
                          *** Normal completion ***            
 
- Wall clock time:                    94.00
- Total CPU time used:                94.38
+ Wall clock time:                    97.00
+ Total CPU time used:                96.90
 
  Total no. of BaR iterations:    3587
  Best solution found at node:       9
