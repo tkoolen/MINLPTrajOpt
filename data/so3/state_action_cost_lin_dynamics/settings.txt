@@ -1,0 +1,11 @@
+N = 10
+T = 4.0
+τmax = 10.0
+quat0 = [-0.207253 -0.761731 -0.61385; -0.782717 0.505525 -0.363042; 0.586857 0.405229 -0.700991]
+ω0 = [0.0, 0.0, 0.0]
+solver = BaronSolver(Base.Iterators.Pairs{Symbol,Real,Tuple{Symbol,Symbol,Symbol},NamedTuple{(:threads, :EpsA, :MaxTime),Tuple{Int64,Float64,Float64}}}(:threads=>20,:EpsA=>0.01,:MaxTime=>30.0))
+status = UserLimit
+objective value = 2.304476410862321
+objective lower bound = 1.44347
+solvetime = 30.0
+

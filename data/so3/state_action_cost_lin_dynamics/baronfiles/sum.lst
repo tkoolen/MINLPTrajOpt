@@ -1,0 +1,87 @@
+===========================================================================
+ BARON version 18.8.23. Built: LNX-64 Thu Aug 23 14:46:44 EDT 2018
+
+ BARON is a product of The Optimization Firm.
+ For information on BARON, see https://minlp.com/about-baron
+
+ If you use this software, please cite publications from
+ https://minlp.com/baron-publications, such as: 
+
+ Khajavirad, A. and N. V. Sahinidis,
+ A hybrid LP/NLP paradigm for global optimization relaxations,
+ Mathematical Programming Computation, 10, 383-421, 2018.
+===========================================================================
+ This BARON run may utilize the following subsolver(s)
+ For LP/MIP: ILOG CPLEX                                      
+ For NLP: IPOPT, FILTERSD, FILTERSQP
+===========================================================================
+    The options used in solving the problem are as follows:
+       maxtime        =  0.3000E+02
+       maxiter        =      -1
+       numsol         =       1
+       firstfeas      =       0
+       cutoff         =  0.1000E+52
+       epsa           =  0.1000E-01
+       epsr           =  0.1000E-03
+       deltaterm      =       0
+       deltaa         =  0.1000E+52
+       deltar         =  0.1000E+01
+       deltat         = -0.1000E+03
+       boxtol         =  0.1000E-07
+       isoltol        =  0.1000E-03
+       absconfeastol  =  0.1000E-04
+       relconfeastol  =  0.0000E+00
+       absintfeastol  =  0.1000E-04
+       relintfeastol  =  0.0000E+00
+       results        =       1
+       summary        =       1
+       times          =       1
+       prtimefreq     =  0.3000E+02
+       prfreq         = 1000000
+       prlevel        =       1
+       numprint       =      -1
+       numprintdual   =      -1
+       lpsol          =       3
+       nlpsol         =      -1
+       allowminos     =       0
+       allowsnopt     =       0
+       allowexternal  =       0
+       allowipopt     =       1
+       allowfiltersd  =       1
+       allowfiltersqp =       1
+       dolocal        =       1
+       numloc         =      -2
+       locres         =       0
+       pdo            =      -2
+       brvarstra      =       0
+       brptstra       =       0
+       nodesel        =       0
+       compiis        =       0
+       iisint         =       1
+       iisorder       =      -1
+       threads        =      20
+===========================================================================
+ Doing local search
+ Preprocessing found feasible solution with value  3.82261435284     
+ Solving bounding LP
+ Starting multi-start local search
+ Preprocessing found feasible solution with value  2.63147356347     
+ Preprocessing found feasible solution with value  2.30690491662     
+ Done with local search
+===========================================================================
+  Iteration    Open nodes         Time (s)    Lower bound      Upper bound
+*         1             1            15.00     1.41743          2.30448    
+          1             1            15.00     1.41743          2.30448    
+          4             3            30.00     1.44347          2.30448    
+
+                    *** Max. allowable time exceeded ***      
+
+ Wall clock time:                    30.00
+ Total CPU time used:                30.00
+
+ Total no. of BaR iterations:       4
+ Best solution found at node:       1
+ Max. no. of nodes in memory:       3
+ 
+ All done
+===========================================================================

@@ -26,7 +26,7 @@ function frac_to_latex(frac::Rational)
     ret
 end
 
-function piticks!(p, pifrac::Rational; axis::Symbol)
+function piticks!(p, pifrac::Rational, θ::AbstractVector; axis::Symbol)
     pifracrange = UnitRange(round.(Int, extrema(θ) ./ (pifrac * π), (RoundDown, RoundUp))...)
     labels = map(pifracrange) do i
         frac = pifrac * i
