@@ -72,7 +72,7 @@ struct PendulumSwingUpProblem
 
         for i = 1 : N
             # Time steps
-            Δt[i] = @variable model basename="Δt_$i"
+            Δt[i] = @variable model basename="Δt_{$i}"
             if fixedstep
                 JuMP.fix(Δt[i], Δtmin)
                 Δti = Δtmin
@@ -83,24 +83,24 @@ struct PendulumSwingUpProblem
             end
 
             # Kinematics delta
-            sΔθ[i], cΔθ[i] = sincosvar(model, "Δθ_$i", θmax=Δθmax, normconstraint=false)
+            sΔθ[i], cΔθ[i] = sincosvar(model, "Δθ_{$i}", θmax=Δθmax, normconstraint=false)
             Δθ[i] = sΔθ[i] # first-order approximation
 
             # Absolute kinematics (from rotation matrix product)
-            sθ[i], cθ[i] = sincosvar(model, "θ_$i", normconstraint=true)
+            sθ[i], cθ[i] = sincosvar(model, "θ_{$i}", normconstraint=true)
             @NLconstraint model sθ[i] == sθprev * cΔθ[i] + cθprev * sΔθ[i]
             @NLconstraint model cθ[i] == cθprev * cΔθ[i] - sθprev * sΔθ[i]
             sθprev, cθprev = sθ[i], cθ[i]
 
             # Velocity, acceleration
-            θd[i] = @variable model basename="θd_$i"
+            θd[i] = @variable model basename="θd_{$i}"
             @constraint model Δti * θd[i] == Δθ[i]
-            θdd[i] = @variable model basename="θdd_$i"
+            θdd[i] = @variable model basename="θdd_{$i}"
             @constraint model Δti * θdd[i] == θd[i] - θdprev
             θdprev = θd[i]
 
             # Torque
-            τ[i] = @variable model basename="τ_$i"
+            τ[i] = @variable model basename="τ_{$i}"
             setlowerbound(τ[i], -τmax)
             setupperbound(τ[i],  τmax)
 

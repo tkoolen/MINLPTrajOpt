@@ -29,17 +29,19 @@ end
 function piticks!(p, pifrac::Rational; axis::Symbol)
     pifracrange = UnitRange(round.(Int, extrema(θ) ./ (pifrac * π), (RoundDown, RoundUp))...)
     labels = map(pifracrange) do i
-        if i == 0
+        frac = pifrac * i
+        if frac == 0
             L"$0$"
-        else
-            frac = pifrac * i
-            if frac == 1
+        elseif abs(frac) == 1
+            if frac > 0
                 L"$\pi$"
-            elseif frac.den == 1
-                latexstring("$(frac.num) \\pi")
             else
-                latexstring(frac_to_latex(pifrac * i) * "\\pi")
+                L"-$\pi$"
             end
+        elseif frac.den == 1
+            latexstring("$(frac.num) \\pi")
+        else
+            latexstring(frac_to_latex(pifrac * i) * "\\pi")
         end
     end
     ticks = pifracrange * pifrac * π
