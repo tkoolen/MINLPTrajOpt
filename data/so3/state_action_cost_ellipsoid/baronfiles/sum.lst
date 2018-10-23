@@ -62,35 +62,29 @@
        threads        =      20
 ===========================================================================
  Doing local search
- Preprocessing found feasible solution with value  4.95778270176     
+ Preprocessing found feasible solution with value  3.42981266142     
  Solving bounding LP
  Starting multi-start local search
  Done with local search
 ===========================================================================
   Iteration    Open nodes         Time (s)    Lower bound      Upper bound
-          1+            1            10.00     2.05767          4.95778    
-*         1             1            15.00     2.13396          3.99902    
-*         1             1            17.00     2.13396          3.82643    
-          1+            1            40.00     2.13396          3.82643    
-          1             1            42.00     2.18875          3.82643    
-          2+            2            49.00     2.18875          3.82643    
-          4+            3            55.00     2.18875          3.82643    
-          5+            4            61.00     2.18875          3.82643    
-          5+            4            67.00     2.18875          3.82643    
-          6+            5            73.00     2.18875          3.82643    
-          7             5            79.00     2.18875          3.82643    
-         10             7            84.00     2.18875          3.82643    
-         12             9            90.00     2.18875          3.82643    
-         13             9            90.00     2.18875          3.82643    
+          1             1            17.00     1.37205          3.42981    
+          2+            2            39.00     1.37205          3.42981    
+*         3             2            40.00     1.37205          3.42788    
+          3             2            48.00     1.37205          3.42788    
+          5             3            70.00     1.46305          3.42788    
+          8             5            76.00     1.72571          3.42788    
+         23            17            81.00     1.72571          3.42788    
+         28            20            90.00     1.72571          3.42788    
 
                     *** Max. allowable time exceeded ***      
 
  Wall clock time:                    90.00
- Total CPU time used:                90.01
+ Total CPU time used:                90.00
 
- Total no. of BaR iterations:      13
- Best solution found at node:       2
- Max. no. of nodes in memory:       9
+ Total no. of BaR iterations:      28
+ Best solution found at node:       3
+ Max. no. of nodes in memory:      20
  
  All done
 ===========================================================================
