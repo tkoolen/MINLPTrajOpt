@@ -144,10 +144,10 @@ struct AcrobotSwingUpProblem
             n2 = @NLexpression model (parameters.I2 + c2 * cθ2[i]) * θ2dd[i]
             n3 = @NLexpression model 2 * c2 * sθ2[i] * θ2d[i] * θ1d[i]
             n4 = @NLexpression model c2 * sθ2[i] * θ2d[i]^2
-            n5 = @expression model c3 * sθ1[i]
-            n6 = @expression model c4 * (sθ1[i]*cθ2[i]+cθ1[i]*sθ2[i])
+            n5 = @NLexpression model c3 * sθ1[i]
+            n6 = @NLexpression model c4 * (sθ1[i]*cθ2[i]+cθ1[i]*sθ2[i])
             n7 = @NLexpression model (parameters.I2 + c2 * cθ2[i]) * θ1dd[i]
-            n8 = @expression model parameters.I2 * θ2dd[i]
+            n8 = @NLexpression model parameters.I2 * θ2dd[i]
             n9 = @NLexpression model c2 * sθ2[i] * θ1d[i]^2
 
             @NLconstraint model n1 + n2 - n3 - n4 + n5 + n6 == 0
