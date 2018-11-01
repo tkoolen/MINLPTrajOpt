@@ -11,7 +11,7 @@ using LinearAlgebra
 using Parameters
 using ..MINLPTrajOpt: sincosvar
 
-@with_kw struct AcrobotParameters:
+@with_kw struct AcrobotParameters
     m1::Float64 = 1.0
     l1::Float64 = 1.0
     m2::Float64 = 1.0
@@ -181,7 +181,7 @@ struct AcrobotSwingUpProblem
         end
 
         new(parameters, model, Δt,  sΔθ1,  cΔθ1,  Δθ1, sθ1, cθ1, θ1d, θ1dd, sΔθ2, cΔθ2, Δθ2, sθ2, cθ2, θ2d, θ2dd, τ)
-    end
-end
+    end # function
+end # struct
 
-end
+end # module
