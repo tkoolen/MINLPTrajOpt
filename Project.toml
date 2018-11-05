@@ -13,6 +13,8 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 [extras]
 BARON = "2e2ca445-9e14-5b13-8677-4410f177f82b"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+NBInclude = "0db19996-df87-5ea3-a455-e3a50d440464"
 
 [targets]
-test = ["Test", "BARON"]
+test = ["Test", "BARON", "NBInclude"]
+
