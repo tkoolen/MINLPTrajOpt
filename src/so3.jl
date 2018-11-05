@@ -22,7 +22,7 @@ function Rotations.Quat(model::JuMP.Model, basename::AbstractString; normconstra
 
     # Avoid unnecessary branches due to Quat double cover.
     # Helps a lot.
-    setlowerbound(w, 0.0)
+    # setlowerbound(w, 0.0)
 
     if normconstraint
         @NLconstraint model w^2 + x^2 + y^2 + z^2 == 1
@@ -93,7 +93,7 @@ struct SO3Problem
 
         for i = 1 : N
             # Kinematics delta
-            Δq[i] = Quat(model, "Δq_{$i}", θmax=Δθmax, normconstraint=true)
+            Δq[i] = Quat(model, "Δq_{$i}", θmax=Δθmax, normconstraint=false)
 
             # Absolute kinematics
             q[i] = Quat(model, "q_{$i}", normconstraint=true)
@@ -111,8 +111,7 @@ struct SO3Problem
 
             # Torque
             τ[i] = varvec3(model, "τ", i)
-            setlowerbound.(τ[i], -τmax)
-            setupperbound.(τ[i],  τmax)
+            @constraint model τ[i] ⋅ τ[i] <= τmax^2
 
             # Dynamics (Euler's equations)
             Ixx = parameters.Ixx
@@ -131,12 +130,12 @@ struct SO3Problem
         # @constraint model ω[N] .== 0.0
 
         # Objective
-        # qw = [q[i].w for i = 1 : N]
-        qv = [[quat.x, quat.y, quat.z] for quat in q]
-        @objective model Min sum(τ[i] ⋅ τ[i] for i = 1 : N) + sum(ω[i]⋅ ω[i] for i = 1 : N) + sum(qv[i]⋅ qv[i] for i = 1 : N)
-        # @objective model Min sum(τ[i] ⋅ τ[i] for i = 1 : N) +
-        #     sum(ω[i]⋅ ω[i] for i = 1 : N) +
-        #     sum((qw[i] - 1) * (qw[i] - 1) for i = 1 : N)
+        qw = [q[i].w for i = 1 : N]
+        qv = [[q[i].x, q[i].y, q[i].z] for i = 1 : N]
+        wτ = 0.1
+        γf = 1.0#0.2
+        γ = γf^(1/(N - 1))
+        @objective model Min sum(γ^(i - 1) * (wτ^2 * τ[i] ⋅ τ[i] + qv[i]⋅ qv[i]) for i = 1 : N) / N
 
         new(parameters, model, q0, Δq, q, ω, ωd, τ)
     end

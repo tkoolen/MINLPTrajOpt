@@ -15,7 +15,7 @@ using ..MINLPTrajOpt: sincosvar
     m::Float64 = 1.0
     l::Float64 = 2.0
     g::Float64 = 9.81
-    b::Float64 = 0.0#0.1
+    b::Float64 = 0.1
 end
 
 abstract type ObjectiveType end

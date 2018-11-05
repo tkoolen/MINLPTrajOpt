@@ -1,3 +1,9 @@
+module PlottingTools
+
+export
+    timeplot,
+    piticks!
+
 using PGFPlotsX
 using LaTeXStrings
 PGFPlotsX.latexengine!(PGFPlotsX.PDFLATEX)
@@ -49,3 +55,5 @@ function piticks!(p, pifrac::Rational, θ::AbstractVector; axis::Symbol)
     p[(x = "xticklabels", y = "yticklabels")[axis]] = labels
     p
 end
+
+end # module
