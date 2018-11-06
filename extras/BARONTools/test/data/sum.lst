@@ -1,0 +1,96 @@
+===========================================================================
+ BARON version 18.8.23. Built: LNX-64 Thu Aug 23 14:46:44 EDT 2018
+
+ BARON is a product of The Optimization Firm.
+ For information on BARON, see https://minlp.com/about-baron
+
+ If you use this software, please cite publications from
+ https://minlp.com/baron-publications, such as: 
+
+ Khajavirad, A. and N. V. Sahinidis,
+ A hybrid LP/NLP paradigm for global optimization relaxations,
+ Mathematical Programming Computation, 10, 383-421, 2018.
+===========================================================================
+ This BARON run may utilize the following subsolver(s)
+ For LP/MIP: ILOG CPLEX                                      
+ For NLP: IPOPT, FILTERSD, FILTERSQP
+===========================================================================
+    The options used in solving the problem are as follows:
+       maxtime        =  0.6000E+02
+       maxiter        =      -1
+       numsol         =       1
+       firstfeas      =       0
+       cutoff         =  0.1000E+52
+       epsa           =  0.1000E-01
+       epsr           =  0.1000E-03
+       deltaterm      =       0
+       deltaa         =  0.1000E+52
+       deltar         =  0.1000E+01
+       deltat         = -0.1000E+03
+       boxtol         =  0.1000E-07
+       isoltol        =  0.1000E-03
+       absconfeastol  =  0.1000E-04
+       relconfeastol  =  0.0000E+00
+       absintfeastol  =  0.1000E-04
+       relintfeastol  =  0.0000E+00
+       results        =       1
+       summary        =       1
+       times          =       1
+       prtimefreq     =  0.5000E+01
+       prfreq         = 1000000
+       prlevel        =       1
+       numprint       =      -1
+       numprintdual   =      -1
+       lpsol          =       3
+       nlpsol         =      -1
+       allowminos     =       0
+       allowsnopt     =       0
+       allowexternal  =       0
+       allowipopt     =       1
+       allowfiltersd  =       1
+       allowfiltersqp =       1
+       dolocal        =       1
+       numloc         =      -2
+       locres         =       0
+       pdo            =      -2
+       brvarstra      =       0
+       brptstra       =       0
+       nodesel        =       0
+       compiis        =       0
+       iisint         =       1
+       iisorder       =      -1
+       threads        =      20
+===========================================================================
+ Doing local search
+ Preprocessing found feasible solution with value 0.810117134283     
+ Solving bounding LP
+ Starting multi-start local search
+ Preprocessing found feasible solution with value 0.417344010233     
+ Done with local search
+===========================================================================
+  Iteration    Open nodes         Time (s)    Lower bound      Upper bound
+          1             1             1.00     0.306712         0.417344    
+         66            39             6.00     0.310216         0.417344    
+        172           104            11.00     0.311283         0.417344    
+        275           163            16.00     0.312151         0.417344    
+        379           230            21.00     0.312805         0.417344    
+        482           293            26.00     0.313522         0.417344    
+        583           349            32.00     0.313815         0.417344    
+        683           412            37.00     0.314224         0.417344    
+        784           473            42.00     0.314815         0.417344    
+        882           531            47.00     0.315142         0.417344    
+        982           586            52.00     0.315705         0.417344    
+       1078           645            57.00     0.316093         0.417344    
+       1141           685            60.00     0.316249         0.417344    
+
+                    *** Max. allowable time exceeded ***      
+
+ Wall clock time:                    60.00
+ Total CPU time used:                60.00
+
+ Total no. of BaR iterations:    1141
+ Best solution found at node:      -1
+ Max. no. of nodes in memory:     685
+ 
+ All done
+===========================================================================
