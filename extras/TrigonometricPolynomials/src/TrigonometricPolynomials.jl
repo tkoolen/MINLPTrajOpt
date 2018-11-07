@@ -2,8 +2,10 @@ module TrigonometricPolynomials
 
 export
     TrigPoly,
-    SinCosDict
+    SinCosDict,
+    simplify
 
+using LinearAlgebra
 using Reexport
 @reexport using DynamicPolynomials
 
@@ -22,7 +24,7 @@ end
 
 const SinCosDict = Dict{Var, SinCosVars}
 
-struct TrigPoly{T<:Real}
+struct TrigPoly{T<:Real} <: Real
     poly::Poly{T}
     sincosmap::SinCosDict
 
@@ -36,21 +38,43 @@ TrigPoly{T}(x, sincosmap::SinCosDict) where {T<:Real} = TrigPoly(Poly{T}(x), sin
 TrigPoly{T}(x) where {T<:Real} = TrigPoly{T}(x, SinCosDict())
 TrigPoly{T}(x::TrigPoly) where {T} = TrigPoly{T}(x.poly, x.sincosmap)
 
-function print_trigpoly(io::IO, mime::MIME, p::TrigPoly)
-    print(io, typeof(p))
-    print(io, ": ")
-    show(io, mime, p.poly)
-    io
+# Utility
+function combine_sin_cos_maps(x::SinCosDict, y::SinCosDict)
+    if x === y
+        x
+    elseif isempty(x)
+        y
+    elseif isempty(y)
+        x
+    else
+        check = (a, b) -> a == b || throw(ArgumentError("Multiple sin/cos variables associated with a variable."))
+        merge(check, x, y)
+    end
 end
 
-Base.show(io::IO, p::TrigPoly) = show(io, MIME"text/plain"(), p)
-Base.show(io::IO, mime::MIME"text/plain", p::TrigPoly) = print_trigpoly(io, mime, p)
-Base.show(io::IO, mime::MIME"text/latex", p::TrigPoly) = print_trigpoly(io, mime, p)
-Base.show(io::IO, mime::MIME"text/print", p::TrigPoly) = print_trigpoly(io, mime, p)
+function simplify(p::TrigPoly)
+    # sin^2 + cos^2 == 1
+    poly = p.poly
+    for (x, sc) in p.sincosmap
+        s = sc.s
+        c = sc.c
+        if s in variables(poly) && c in variables(poly)
+            d, r = divrem(poly, s^2 + c^2)
+            poly = d + r
+        end
+    end
+    TrigPoly(poly, p.sincosmap)
+end
+
+# Pretty-printing
+Base.show(io::IO, p::TrigPoly) = show(io, p.poly)
+Base.show(io::IO, mime::MIME"text/plain", p::TrigPoly) = show(io, mime, p.poly)
+Base.show(io::IO, mime::MIME"text/latex", p::TrigPoly) = show(io, mime, p.poly)
+Base.show(io::IO, mime::MIME"text/print", p::TrigPoly) = show(io, mime, p.poly)
 
 # Math
 for (fun, varname) in [(:sin, :s), (:cos, :c)]
-    @eval function Base.$fun(p::TrigPoly{T}) where {T}
+    @eval function Base.$fun(p::TrigPoly{T}) where {T<:Real}
         poly = p.poly
         maxdegree(poly) > 1 && throw(ArgumentError("Cannot handle degree > 1."))
 
@@ -94,18 +118,7 @@ for (fun, varname) in [(:sin, :s), (:cos, :c)]
     end
 end
 
-function combine_sin_cos_maps(x::SinCosDict, y::SinCosDict)
-    if x === y
-        x
-    elseif isempty(x)
-        y
-    elseif isempty(y)
-        x
-    else
-        check = (a, b) -> a == b || throw(ArgumentError("Multiple sin/cos variables associated with a variable."))
-        merge(check, x, y)
-    end
-end
+Base.sincos(p::TrigPoly) = (sin(p), cos(p))
 
 for op in [:+, :-, :*]
     @eval Base.$op(x::TrigPoly, y::TrigPoly) = TrigPoly($op(x.poly, y.poly), combine_sin_cos_maps(x.sincosmap, y.sincosmap))
@@ -121,17 +134,29 @@ for op in [:+, :-]
 end
 
 for fun in [:zero, :one]
-    @eval Base.$fun(::Type{TrigPoly{T}}) where {T} = TrigPoly(zero(T))
+    @eval Base.$fun(::Type{TrigPoly{T}}) where {T<:Real} = TrigPoly($fun(T))
     @eval Base.$fun(p::TrigPoly) = TrigPoly($fun(p.poly), p.sincosmap)
 end
 
 Base.:^(x::TrigPoly, p::Integer) = Base.power_by_squaring(x, p)
 
+
+# Number-like interface
+LinearAlgebra.dot(x::TrigPoly, y::TrigPoly) = x * y
+LinearAlgebra.dot(x::TrigPoly, y::Number) = x * y
+LinearAlgebra.dot(x::Number, y::TrigPoly) = x * y
+LinearAlgebra.symmetric_type(::Type{T}) where {T<:TrigPoly} = T
+Base.transpose(p::TrigPoly) = TrigPoly(transpose(p.poly), p.sincosmap)
+Base.adjoint(p::TrigPoly) = TrigPoly(adjoint(p.poly), p.sincosmap)
+Base.broadcastable(p::TrigPoly) = Ref(p)
+Base.conj(p::TrigPoly) = p
+
 # Promotion/conversion
 Base.promote_rule(::Type{TrigPoly{T1}}, ::Type{TrigPoly{T2}}) where {T1<:Real, T2<:Real} = TrigPoly{promote_type(T1, T2)}
 Base.promote_rule(::Type{TrigPoly{T1}}, ::Type{T2}) where {T1<:Real, T2<:Real} = TrigPoly{promote_type(T1, T2)}
 
-Base.convert(::Type{TrigPoly{T}}, x::TrigPoly{T}) where {T} = x
-Base.convert(::Type{TrigPoly{T}}, x::TrigPoly) where {T} = TrigPoly{T}(x)
+Base.convert(::Type{TrigPoly{T}}, x::TrigPoly{T}) where {T<:Real} = x
+Base.convert(::Type{TrigPoly{T}}, x::TrigPoly) where {T<:Real} = TrigPoly{T}(x)
+Base.convert(::Type{TrigPoly{T}}, x::Real) where {T} = TrigPoly{T}(x)
 
 end # module
