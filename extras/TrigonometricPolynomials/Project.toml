@@ -5,6 +5,7 @@ version = "0.1.0"
 
 [deps]
 DynamicPolynomials = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [extras]

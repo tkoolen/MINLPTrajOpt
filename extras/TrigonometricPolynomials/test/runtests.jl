@@ -60,7 +60,8 @@ end
     p = sin(TrigPoly(3θ))
     buf = IOBuffer()
     show(buf, p)
-    @test occursin("TrigPoly{Float64}: -sin(θ)³ + 3.0sin(θ)cos(θ)²", String(take!(buf)))
+    result = String(take!(buf))
+    @test occursin("-sin(θ)³ + 3.0sin(θ)cos(θ)²", result)
 end
 
 @testset "combine" begin
