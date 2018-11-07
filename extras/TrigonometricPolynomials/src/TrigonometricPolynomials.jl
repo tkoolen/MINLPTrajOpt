@@ -31,7 +31,9 @@ end
 
 TrigPoly(x::Poly{T}, sincosmap::SinCosDict) where {T<:Real} = TrigPoly{T}(x, sincosmap)
 TrigPoly(x, sincosmap::SinCosDict) = TrigPoly(Poly(x), sincosmap)
+TrigPoly(x) = TrigPoly(x, SinCosDict())
 TrigPoly{T}(x, sincosmap::SinCosDict) where {T<:Real} = TrigPoly(Poly{T}(x), sincosmap)
+TrigPoly{T}(x) where {T<:Real} = TrigPoly{T}(x, SinCosDict())
 TrigPoly{T}(x::TrigPoly) where {T} = TrigPoly{T}(x.poly, x.sincosmap)
 
 function print_trigpoly(io::IO, mime::MIME, p::TrigPoly)
@@ -92,11 +94,21 @@ for (fun, varname) in [(:sin, :s), (:cos, :c)]
     end
 end
 
-for op in [:+, :-, :*]
-    @eval function Base.$op(x::TrigPoly, y::TrigPoly)
-        x.sincosmap === y.sincosmap || throw(ArgumentError("sincosmap mismatch"))
-        TrigPoly($op(x.poly, y.poly), x.sincosmap)
+function combine_sin_cos_maps(x::SinCosDict, y::SinCosDict)
+    if x === y
+        x
+    elseif isempty(x)
+        y
+    elseif isempty(y)
+        x
+    else
+        check = (a, b) -> a == b || throw(ArgumentError("Multiple sin/cos variables associated with a variable."))
+        merge(check, x, y)
     end
+end
+
+for op in [:+, :-, :*]
+    @eval Base.$op(x::TrigPoly, y::TrigPoly) = TrigPoly($op(x.poly, y.poly), combine_sin_cos_maps(x.sincosmap, y.sincosmap))
 end
 
 for op in [:+, :-, :*, :/, :\]
@@ -109,6 +121,7 @@ for op in [:+, :-]
 end
 
 for fun in [:zero, :one]
+    @eval Base.$fun(::Type{TrigPoly{T}}) where {T} = TrigPoly(zero(T))
     @eval Base.$fun(p::TrigPoly) = TrigPoly($fun(p.poly), p.sincosmap)
 end
 
