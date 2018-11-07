@@ -1,10 +1,8 @@
 [[AmplNLWriter]]
 deps = ["Compat", "MathProgBase"]
-git-tree-sha1 = "ab22b1d4af90002615e0c0f5e550d6ec32734ebf"
-repo-rev = "tk/0.7"
-repo-url = "git@github.com:tkoolen/AmplNLWriter.jl.git"
+git-tree-sha1 = "b1e6ab8c6ea5d708c87b98cd6e9b1325f295b405"
 uuid = "7c4d4715-977e-5154-bfe0-e096adeac482"
-version = "0.4.2+"
+version = "0.4.2"
 
 [[ArgCheck]]
 deps = ["Random", "Test"]
@@ -71,12 +69,6 @@ git-tree-sha1 = "2d9e14d19bad3f9ad5cc5e4cffabc3cfa59de825"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
 version = "1.3.0"
 
-[[Conda]]
-deps = ["Compat", "JSON", "VersionParsing"]
-git-tree-sha1 = "fb86fe40cb5b35990e368709bfdc1b46dbb99dac"
-uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
-version = "1.1.1"
-
 [[CoordinateTransformations]]
 deps = ["Compat", "Rotations", "StaticArrays"]
 git-tree-sha1 = "47f05d0b7f4999609f92e657147df000818c1f24"
@@ -85,9 +77,9 @@ version = "0.5.0"
 
 [[CouenneNL]]
 deps = ["AmplNLWriter", "BinDeps", "Lazy", "MathProgBase"]
-git-tree-sha1 = "d52eb949f5bf88e0774a1aa761c728cd87528f5c"
-repo-rev = "tk/0.7"
-repo-url = "git@github.com:tkoolen/CouenneNL.jl.git"
+git-tree-sha1 = "e22d22046ae7695cb2da8f09863abe97d33c6daa"
+repo-rev = "master"
+repo-url = "https://github.com/rdeits/CouenneNL.jl.git"
 uuid = "5724587f-3074-5673-b62c-b97e3475008a"
 version = "0.0.0"
 
@@ -267,9 +259,9 @@ version = "0.7.7"
 
 [[MbedTLS]]
 deps = ["BinaryProvider", "Dates", "Libdl", "Random", "Sockets", "Test"]
-git-tree-sha1 = "294100fb8907956b1afd9ce3294e085c2de5bd5e"
+git-tree-sha1 = "c93a87da4081a3de781f34e0540175795a2ce83d"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "0.6.5"
+version = "0.6.6"
 
 [[Measures]]
 deps = ["Test"]
@@ -370,12 +362,6 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 deps = ["Printf"]
 uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
-[[PyCall]]
-deps = ["Compat", "Conda", "MacroTools", "Statistics", "VersionParsing"]
-git-tree-sha1 = "ce4681263f41d98b3faf6107b28284bf8b866f5f"
-uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
-version = "1.18.5"
-
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
@@ -389,12 +375,6 @@ deps = ["Compat"]
 git-tree-sha1 = "fd159bead0a24e6270fd0573a340312bd4645cc2"
 uuid = "c84ed2f1-dad5-54f0-aa8e-dbefe2724439"
 version = "0.3.0"
-
-[[RecipesBase]]
-deps = ["Random", "Test"]
-git-tree-sha1 = "0b3cb370ee4dc00f47f1193101600949f3dcf884"
-uuid = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
-version = "0.6.0"
 
 [[Reexport]]
 deps = ["Pkg"]
@@ -443,12 +423,6 @@ version = "0.3.1"
 deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
-[[SpecialFunctions]]
-deps = ["BinDeps", "BinaryProvider", "Libdl", "Test"]
-git-tree-sha1 = "0b45dc2e45ed77f445617b99ff2adf0f5b0f23ea"
-uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "0.7.2"
-
 [[StaticArrays]]
 deps = ["InteractiveUtils", "LinearAlgebra", "Random", "Statistics", "Test"]
 git-tree-sha1 = "d432c79bef174a830304f8601427a4357dfdbfb7"
@@ -464,12 +438,6 @@ deps = ["DataStructures", "LinearAlgebra", "Missings", "Printf", "Random", "Sort
 git-tree-sha1 = "723193a13e8078cec6dcd0b8fe245c8bfd81690e"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.25.0"
-
-[[SymPy]]
-deps = ["LinearAlgebra", "PyCall", "RecipesBase", "SpecialFunctions", "Test"]
-git-tree-sha1 = "bfb45fc05ed9f875fecdd1f14a5d0d11b566f4bc"
-uuid = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
-version = "0.8.2"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
@@ -494,15 +462,10 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
-[[VersionParsing]]
-deps = ["Compat"]
-git-tree-sha1 = "c9d5aa108588b978bd859554660c8a5c4f2f7669"
-uuid = "81def892-9a0e-5fdd-b105-ffc91e053289"
-version = "1.1.3"
-
 [[WebIO]]
 deps = ["AssetRegistry", "Base64", "Compat", "FunctionalCollections", "JSON", "Logging", "Observables", "Random", "Requires", "Sockets", "Test", "UUIDs", "Widgets"]
 git-tree-sha1 = "1f70c8c7c30fd6cf95fd5d517e59a5327505a043"
+pinned = true
 uuid = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
 version = "0.4.0"
 

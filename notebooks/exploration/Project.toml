@@ -1,5 +1,4 @@
 [deps]
-AmplNLWriter = "7c4d4715-977e-5154-bfe0-e096adeac482"
 BARON = "2e2ca445-9e14-5b13-8677-4410f177f82b"
 CoordinateTransformations = "150eb455-5306-5404-9cee-2592286d6298"
 CouenneNL = "5724587f-3074-5673-b62c-b97e3475008a"
@@ -10,4 +9,4 @@ MeshCatMechanisms = "6ad125db-dd91-5488-b820-c1df6aab299d"
 PGFPlotsX = "8314cec4-20b6-5062-9cdb-752b83310925"
 RigidBodyDynamics = "366cf18f-59d5-5db9-a4de-86a9f6786172"
 Rotations = "6038ab10-8711-5258-84ad-4b1120ba62dc"
-SymPy = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
+WebIO = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
