@@ -39,6 +39,8 @@ TrigPoly{T}(x) where {T<:Real} = TrigPoly{T}(x, SinCosDict())
 TrigPoly{T}(x::TrigPoly) where {T} = TrigPoly{T}(x.poly, x.sincosmap)
 
 # Utility
+MultivariatePolynomials.variable(x::TrigPoly) = variable(x.poly)
+
 function combine_sin_cos_maps(x::SinCosDict, y::SinCosDict)
     if x === y
         x
@@ -47,7 +49,10 @@ function combine_sin_cos_maps(x::SinCosDict, y::SinCosDict)
     elseif isempty(y)
         x
     else
-        check = (a, b) -> a == b || throw(ArgumentError("Multiple sin/cos variables associated with a variable."))
+        check = function (a, b)
+            a == b || throw(ArgumentError("Multiple sin/cos variables associated with a variable."))
+            a
+        end
         merge(check, x, y)
     end
 end
@@ -63,6 +68,7 @@ function simplify(p::TrigPoly)
             poly = d + r
         end
     end
+
     TrigPoly(poly, p.sincosmap)
 end
 
@@ -121,7 +127,7 @@ end
 Base.sincos(p::TrigPoly) = (sin(p), cos(p))
 
 for op in [:+, :-, :*]
-    @eval Base.$op(x::TrigPoly, y::TrigPoly) = TrigPoly($op(x.poly, y.poly), combine_sin_cos_maps(x.sincosmap, y.sincosmap))
+    @eval Base.$op(x::TrigPoly, y::TrigPoly) = simplify(TrigPoly($op(x.poly, y.poly), combine_sin_cos_maps(x.sincosmap, y.sincosmap)))
 end
 
 for op in [:+, :-, :*, :/, :\]
@@ -158,5 +164,8 @@ Base.promote_rule(::Type{TrigPoly{T1}}, ::Type{T2}) where {T1<:Real, T2<:Real} =
 Base.convert(::Type{TrigPoly{T}}, x::TrigPoly{T}) where {T<:Real} = x
 Base.convert(::Type{TrigPoly{T}}, x::TrigPoly) where {T<:Real} = TrigPoly{T}(x)
 Base.convert(::Type{TrigPoly{T}}, x::Real) where {T} = TrigPoly{T}(x)
+
+# Hashing
+Base.hash(x::TrigPoly, h::UInt) = Base.hash_uint(3h - objectid(x))
 
 end # module
