@@ -448,9 +448,11 @@ version = "0.5.2"
 
 [[RigidBodyDynamics]]
 deps = ["DocStringExtensions", "LightXML", "LinearAlgebra", "LoopThrottle", "Profile", "Random", "Reexport", "Rotations", "SparseArrays", "StaticArrays", "Test", "TypeSortedCollections"]
-git-tree-sha1 = "1321f1f41dbe275f6d08c3fcdcd1a906bdf96f3c"
+git-tree-sha1 = "3ab8c7a21deb8adfcb34c3fe2445af0ef6777956"
+repo-rev = "86bc94bb487f9b8634976a8aced942d64fab0dad"
+repo-url = "https://github.com/JuliaRobotics/RigidBodyDynamics.jl.git"
 uuid = "366cf18f-59d5-5db9-a4de-86a9f6786172"
-version = "1.1.0"
+version = "1.1.0+"
 
 [[Rotations]]
 deps = ["LinearAlgebra", "Random", "StaticArrays", "Statistics", "Test"]
@@ -505,9 +507,9 @@ version = "0.4.0"
 
 [[Tables]]
 deps = ["Requires", "Test"]
-git-tree-sha1 = "be3a3a28a1e6c4fdd838bdf21e796f7a592c565c"
+git-tree-sha1 = "c7fb447deab835fa70ce6717e78c68b0f466a42c"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "0.1.10"
+version = "0.1.11"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
@@ -553,7 +555,6 @@ version = "0.5.3"
 [[WebIO]]
 deps = ["AssetRegistry", "Base64", "Compat", "FunctionalCollections", "JSON", "Logging", "Observables", "Random", "Requires", "Sockets", "Test", "UUIDs", "Widgets"]
 git-tree-sha1 = "c1f259d4c23f12262f4fa69263a4e54fbea77450"
-pinned = true
 uuid = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
 version = "0.4.2"
 
