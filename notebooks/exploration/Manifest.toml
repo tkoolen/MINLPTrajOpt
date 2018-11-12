@@ -149,12 +149,6 @@ git-tree-sha1 = "a016e0bfe98a748c4488e2248c2ef4c67d6fdd35"
 uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.5.0"
 
-[[DynamicPolynomials]]
-deps = ["LinearAlgebra", "MultivariatePolynomials", "Pkg", "Reexport", "Test"]
-git-tree-sha1 = "6cfaf56193f5bf6ac6b1b033b994ef3808c5d831"
-uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
-version = "0.1.2"
-
 [[FileIO]]
 deps = ["Pkg", "Random", "Test"]
 git-tree-sha1 = "481e4db939f005db39f7296599d0543c0744fe30"
@@ -354,12 +348,6 @@ git-tree-sha1 = "c44b3470fa98705f9c12cb44ec9504de3af027ad"
 uuid = "99f44e22-a591-53d1-9472-aa23ef4bd671"
 version = "0.2.0"
 
-[[MultivariatePolynomials]]
-deps = ["LinearAlgebra", "Test"]
-git-tree-sha1 = "1d8f77292707c262acfa3659336426bbb153df50"
-uuid = "102ac46a-7ee4-5c85-9060-abc95bfdeaa3"
-version = "0.2.5"
-
 [[Mux]]
 deps = ["AssetRegistry", "Base64", "HTTP", "Hiccup", "Lazy", "Pkg", "Sockets", "Test", "WebSockets"]
 git-tree-sha1 = "487feb060cdd5cc152ef4f75b3cb565c0dc4300a"
@@ -520,12 +508,6 @@ deps = ["Pkg", "Random", "Test"]
 git-tree-sha1 = "a34a2d588e2d2825602bf14a24216d5c8b0921ec"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 version = "0.8.1"
-
-[[TrigonometricPolynomials]]
-deps = ["DynamicPolynomials", "LinearAlgebra", "Reexport"]
-path = "../../extras/TrigonometricPolynomials"
-uuid = "09b09426-e1f6-11e8-37bd-0b67245178a2"
-version = "0.1.0"
 
 [[TypeSortedCollections]]
 deps = ["Test"]
