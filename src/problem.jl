@@ -69,20 +69,12 @@ struct TrajOptProblem
                 if joint_type(joint) isa SinCosRevolute
                     # Kinematics delta
                     sΔθ, cΔθ = Δq[joint]
-                    setlowerbound.((sΔθ, cΔθ), -1.0)
-                    setupperbound.((sΔθ, cΔθ),  1.0)
-                    if Δθmax < π / 2
-                        @constraint model -sin(Δθmax) <= sΔθ <= sin(Δθmax)
-                        if Δθmax < π
-                            @constraint model cos(Δθmax) <= cΔθ
-                        end
-                    end
+                    sincosconstraints(model, sΔθ, cΔθ; normconstraint=false, θmax=Δθmax)
 
                     # Absolute kinematics (from rotation matrix product)
                     sθprev, cθprev = qprev[joint]
                     sθ, cθ = q[joint]
-                    setlowerbound.((sθ, cθ), -1.0)
-                    setupperbound.((sθ, cθ),  1.0)
+                    sincosconstraints(model, sθ, cθ; normconstraint=true)
                     @NLconstraint model sθ^2 + cθ^2 == 1
                     @NLconstraint model sθ == sθprev * cΔθ + cθprev * sΔθ
                     @NLconstraint model cθ == cθprev * cΔθ - sθprev * sΔθ

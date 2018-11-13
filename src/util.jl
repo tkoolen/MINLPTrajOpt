@@ -1,6 +1,4 @@
-function sincosvar(model::JuMP.Model, basename::AbstractString; normconstraint=true, θmax=Inf)
-    s = @variable model basename="s"*basename
-    c = @variable model basename="c"*basename
+function sincosconstraints(model::Model, s::Variable, c::Variable; normconstraint=true, θmax=Inf)
     setlowerbound.((s, c), -1.0)
     setupperbound.((s, c),  1.0)
     if normconstraint
@@ -12,5 +10,6 @@ function sincosvar(model::JuMP.Model, basename::AbstractString; normconstraint=t
             @constraint model cos(θmax) <= c
         end
     end
-    s, c
+    nothing
 end
+
