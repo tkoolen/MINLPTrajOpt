@@ -9,6 +9,7 @@ using JuMP
 using LinearAlgebra
 using RigidBodyDynamics
 using TrigonometricPolynomials
+using Rotations
 using RigidBodyDynamics.CustomCollections: SegmentedVector
 using RigidBodyDynamics: upper, lower
 

@@ -23,18 +23,18 @@ struct TrajOptProblem
         model = Model(solver=solver)
         nq = num_positions(mechanism)
         nv = num_velocities(mechanism)
-    
+
         # Time step settings
         @assert Δtmax >= Δtmin
         fixedstep = Δtmin == Δtmax
         if fixedstep
             T == N * Δtmax || throw(ArgumentError("Total time does not match Δt."))
         end
-    
+
         # Initial state
         qprev = configuration(x0)
         vprev = velocity(x0)
-        
+
         # Variable vectors
         Δts = Vector{JuMP.Variable}(undef, N)
         Δqs = [similar(qprev, JuMP.Variable) for i = 1 : N]
@@ -42,10 +42,10 @@ struct TrajOptProblem
         vs = [similar(vprev, JuMP.Variable) for i = 1 : N]
         v̇s = [similar(vprev, JuMP.Variable) for i = 1 : N]
         τs = [similar(vprev, JuMP.Variable) for i = 1 : N]
-    
+
         # Symbolic dynamics
         qsym, vsym, v̇sym, τsym, dynsym = symbolic_dynamics(mechanism)
-   
+
         for i = 1 : N
             # Create variables
             Δts[i] = @variable model basename="Δt_{$i}"
@@ -54,7 +54,7 @@ struct TrajOptProblem
             v = vs[i] .= [@variable model basename="v_{$j,$i}" for j = 1 : nv]
             v̇ = v̇s[i] .= [@variable model basename="v̇_{$j,$i}" for j = 1 : nv]
             τ = τs[i] .= [@variable model basename="τ_{$j,$i}" for j = 1 : nv]
-        
+
             # Time steps
             if fixedstep
                 JuMP.fix(Δts[i], Δtmin)
@@ -64,7 +64,7 @@ struct TrajOptProblem
                 JuMP.setupperbound(Δts[i], Δtmax)
                 Δt = Δts[i]
             end
-        
+
             for joint in tree_joints(mechanism)
                 if joint_type(joint) isa SinCosRevolute
                     # Kinematics delta
@@ -75,16 +75,29 @@ struct TrajOptProblem
                     sθprev, cθprev = qprev[joint]
                     sθ, cθ = q[joint]
                     sincosconstraints(model, sθ, cθ; normconstraint=true)
-                    @NLconstraint model sθ^2 + cθ^2 == 1
                     @NLconstraint model sθ == sθprev * cΔθ + cθprev * sΔθ
                     @NLconstraint model cθ == cθprev * cΔθ - sθprev * sΔθ
-                
+
                     # Velocity
                     Δθ = sΔθ # first-order approximation
                     θd = v[joint][1]
                     @constraint model Δt * θd == Δθ
+                elseif joint_type(joint) isa QuaternionSpherical
+                    # Kinematics delta
+                    Δquat = Quat(Δq[joint]..., false)
+                    quatconstraints(model, Δquat; normconstraint=false, θmax=Δθmax, w_nonnegative=true)
+
+                    # Absolute kinematics
+                    quatprev = Quat(qprev[joint]..., false)
+                    quat = Quat(q[joint]..., false)
+                    quatconstraints(model, quat; normconstraint=true)
+                    quatmulconstraints(model, quatprev, Δquat, quat)
+
+                    # Velocity
+                    ω = v[joint]
+                    @constraint model Δt .* ω .== [Δquat.x, Δquat.y, Δquat.z] # first-order approximation
                 else
-                    error() # TODO
+                    throw(ArgumentError("Unhandled joint type"))
                 end
 
                 # Effort bounds
@@ -97,10 +110,10 @@ struct TrajOptProblem
                     end
                 end
             end
-        
+
             # Acceleration
             @constraint model Δt .* v̇ .== v .- vprev
-            
+
             # Dynamics
             varmap = Dict(Iterators.flatten((
                     zip(variable.(qsym), q),
@@ -124,17 +137,17 @@ struct TrajOptProblem
             @constraint model qs[end] .== configuration(xf)
             @constraint model vs[end] .== velocity(xf)
         end
-    
+
         problem = new(mechanism, model, Δts, Δqs, qs, vs, v̇s, τs)
 
         # Objective
         setobjective!(problem, objective)
-        
+
         problem
     end
 end
 
-function symbolic_dynamics(mechanism::Mechanism{X}) where X
+function symbolic_dynamics(mechanism::Mechanism{X}, simplify_iters=10) where X # TODO: simplify_iters
     nq = num_positions(mechanism)
     nv = num_velocities(mechanism)
     sincosmap = SinCosDict()
@@ -159,8 +172,21 @@ function symbolic_dynamics(mechanism::Mechanism{X}) where X
     setdirty!(state)
     M = mass_matrix(state)
     c = dynamics_bias(state)
-    # TODO: simplify given quaternion unit norm
-    q, v, v̇, τ, M * v̇ + c - τ
+    eom = M * v̇ + c - τ
+    for i = 1 : simplify_iters
+        for joint in joints(mechanism)
+            if joint_type(joint) isa QuaternionSpherical
+                w, x, y, z = map(x -> x.poly, q[joint])
+                normsquared = w^2 + x^2 + y^2 + z^2 # == 1
+                map!(eom, eom) do trigpoly
+                    poly = trigpoly.poly
+                    d, r = divrem(poly, normsquared)
+                    TrigPoly(d + r, trigpoly.sincosmap)
+                end
+            end
+        end
+    end
+    q, v, v̇, τ, eom
 end
 
 function dynamics_constraints(sym_dynamics::AbstractVector{<:TrigPoly}, varmap::Dict{Var})
