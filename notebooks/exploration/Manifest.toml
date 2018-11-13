@@ -313,7 +313,7 @@ version = "0.3.0"
 deps = ["ColorTypes", "Compat", "CoordinateTransformations", "FileIO", "GeometryTypes", "LightXML", "MeshIO", "Pkg", "RigidBodyDynamics", "Rotations", "StaticArrays"]
 path = "/home/twan/.julia/dev/MechanismGeometries"
 uuid = "931e9471-e8fb-5385-a477-07ad12718aca"
-version = "0.1.1+"
+version = "0.1.2+"
 
 [[MeshCat]]
 deps = ["AssetRegistry", "BinDeps", "Colors", "Compat", "CoordinateTransformations", "DocStringExtensions", "GeometryTypes", "JSExpr", "JSON", "Libdl", "MsgPack", "Mux", "Parameters", "Requires", "Rotations", "StaticArrays", "WebIO"]
@@ -436,13 +436,17 @@ version = "0.5.2"
 
 [[RigidBodyDynamics]]
 deps = ["DocStringExtensions", "LightXML", "LinearAlgebra", "LoopThrottle", "Profile", "Random", "Reexport", "Rotations", "SparseArrays", "StaticArrays", "Test", "TypeSortedCollections"]
-path = "/home/twan/.julia/dev/RigidBodyDynamics"
+git-tree-sha1 = "af90bbd4fed2017bbaaa9baed44d3eed8c4aa00c"
+repo-rev = "master"
+repo-url = "https://github.com/JuliaRobotics/RigidBodyDynamics.jl.git"
 uuid = "366cf18f-59d5-5db9-a4de-86a9f6786172"
 version = "1.1.0+"
 
 [[Rotations]]
 deps = ["LinearAlgebra", "Random", "StaticArrays", "Statistics", "Test"]
-path = "/home/twan/.julia/dev/Rotations"
+git-tree-sha1 = "989dfe99ebde8aa765429ef1dcf93dc318502f38"
+repo-rev = "tk/skip-norm-one"
+repo-url = "https://github.com/FugroRoames/Rotations.jl.git"
 uuid = "6038ab10-8711-5258-84ad-4b1120ba62dc"
 version = "0.9.1+"
 

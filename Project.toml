@@ -12,9 +12,9 @@ Rotations = "6038ab10-8711-5258-84ad-4b1120ba62dc"
 TrigonometricPolynomials = "09b09426-e1f6-11e8-37bd-0b67245178a2"
 
 [extras]
-BARON = "2e2ca445-9e14-5b13-8677-4410f177f82b"
 NBInclude = "0db19996-df87-5ea3-a455-e3a50d440464"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test", "BARON", "NBInclude"]
+test = ["Test", "NBInclude", "Pkg"]
