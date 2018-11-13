@@ -311,9 +311,9 @@ version = "0.3.0"
 
 [[MechanismGeometries]]
 deps = ["ColorTypes", "Compat", "CoordinateTransformations", "FileIO", "GeometryTypes", "LightXML", "MeshIO", "Pkg", "RigidBodyDynamics", "Rotations", "StaticArrays"]
-git-tree-sha1 = "5191190f3bb652cc65297ec8122297172c6e3c80"
+path = "/home/twan/.julia/dev/MechanismGeometries"
 uuid = "931e9471-e8fb-5385-a477-07ad12718aca"
-version = "0.1.1"
+version = "0.1.1+"
 
 [[MeshCat]]
 deps = ["AssetRegistry", "BinDeps", "Colors", "Compat", "CoordinateTransformations", "DocStringExtensions", "GeometryTypes", "JSExpr", "JSON", "Libdl", "MsgPack", "Mux", "Parameters", "Requires", "Rotations", "StaticArrays", "WebIO"]
