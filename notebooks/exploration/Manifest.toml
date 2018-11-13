@@ -149,12 +149,6 @@ git-tree-sha1 = "a016e0bfe98a748c4488e2248c2ef4c67d6fdd35"
 uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.5.0"
 
-[[DynamicPolynomials]]
-deps = ["LinearAlgebra", "MultivariatePolynomials", "Pkg", "Reexport", "Test"]
-git-tree-sha1 = "6cfaf56193f5bf6ac6b1b033b994ef3808c5d831"
-uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
-version = "0.1.2"
-
 [[FileIO]]
 deps = ["Pkg", "Random", "Test"]
 git-tree-sha1 = "481e4db939f005db39f7296599d0543c0744fe30"
@@ -317,9 +311,9 @@ version = "0.3.0"
 
 [[MechanismGeometries]]
 deps = ["ColorTypes", "Compat", "CoordinateTransformations", "FileIO", "GeometryTypes", "LightXML", "MeshIO", "Pkg", "RigidBodyDynamics", "Rotations", "StaticArrays"]
-git-tree-sha1 = "5191190f3bb652cc65297ec8122297172c6e3c80"
+path = "/home/twan/.julia/dev/MechanismGeometries"
 uuid = "931e9471-e8fb-5385-a477-07ad12718aca"
-version = "0.1.1"
+version = "0.1.2+"
 
 [[MeshCat]]
 deps = ["AssetRegistry", "BinDeps", "Colors", "Compat", "CoordinateTransformations", "DocStringExtensions", "GeometryTypes", "JSExpr", "JSON", "Libdl", "MsgPack", "Mux", "Parameters", "Requires", "Rotations", "StaticArrays", "WebIO"]
@@ -353,12 +347,6 @@ deps = ["Compat", "Random", "Test"]
 git-tree-sha1 = "c44b3470fa98705f9c12cb44ec9504de3af027ad"
 uuid = "99f44e22-a591-53d1-9472-aa23ef4bd671"
 version = "0.2.0"
-
-[[MultivariatePolynomials]]
-deps = ["LinearAlgebra", "Test"]
-git-tree-sha1 = "1d8f77292707c262acfa3659336426bbb153df50"
-uuid = "102ac46a-7ee4-5c85-9060-abc95bfdeaa3"
-version = "0.2.5"
 
 [[Mux]]
 deps = ["AssetRegistry", "Base64", "HTTP", "Hiccup", "Lazy", "Pkg", "Sockets", "Test", "WebSockets"]
@@ -448,17 +436,19 @@ version = "0.5.2"
 
 [[RigidBodyDynamics]]
 deps = ["DocStringExtensions", "LightXML", "LinearAlgebra", "LoopThrottle", "Profile", "Random", "Reexport", "Rotations", "SparseArrays", "StaticArrays", "Test", "TypeSortedCollections"]
-git-tree-sha1 = "3ab8c7a21deb8adfcb34c3fe2445af0ef6777956"
-repo-rev = "86bc94bb487f9b8634976a8aced942d64fab0dad"
+git-tree-sha1 = "af90bbd4fed2017bbaaa9baed44d3eed8c4aa00c"
+repo-rev = "master"
 repo-url = "https://github.com/JuliaRobotics/RigidBodyDynamics.jl.git"
 uuid = "366cf18f-59d5-5db9-a4de-86a9f6786172"
 version = "1.1.0+"
 
 [[Rotations]]
 deps = ["LinearAlgebra", "Random", "StaticArrays", "Statistics", "Test"]
-git-tree-sha1 = "b629771d0de88979cbdbf72ceddc54de58fde149"
+git-tree-sha1 = "989dfe99ebde8aa765429ef1dcf93dc318502f38"
+repo-rev = "tk/skip-norm-one"
+repo-url = "https://github.com/FugroRoames/Rotations.jl.git"
 uuid = "6038ab10-8711-5258-84ad-4b1120ba62dc"
-version = "0.9.1"
+version = "0.9.1+"
 
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
@@ -520,12 +510,6 @@ deps = ["Pkg", "Random", "Test"]
 git-tree-sha1 = "a34a2d588e2d2825602bf14a24216d5c8b0921ec"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 version = "0.8.1"
-
-[[TrigonometricPolynomials]]
-deps = ["DynamicPolynomials", "LinearAlgebra", "Reexport"]
-path = "../../extras/TrigonometricPolynomials"
-uuid = "09b09426-e1f6-11e8-37bd-0b67245178a2"
-version = "0.1.0"
 
 [[TypeSortedCollections]]
 deps = ["Test"]

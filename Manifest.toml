@@ -1,11 +1,3 @@
-[[BARON]]
-deps = ["Compat", "MathProgBase"]
-git-tree-sha1 = "fe9278444e7e343c92429e457207497325e27db5"
-repo-rev = "master"
-repo-url = "https://github.com/joehuchette/BARON.jl.git"
-uuid = "2e2ca445-9e14-5b13-8677-4410f177f82b"
-version = "0.4.3+"
-
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
@@ -69,6 +61,18 @@ version = "0.0.7"
 deps = ["LinearAlgebra", "Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
+[[DocStringExtensions]]
+deps = ["LibGit2", "Markdown", "Pkg", "Test"]
+git-tree-sha1 = "a016e0bfe98a748c4488e2248c2ef4c67d6fdd35"
+uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+version = "0.5.0"
+
+[[DynamicPolynomials]]
+deps = ["LinearAlgebra", "MultivariatePolynomials", "Pkg", "Reexport", "Test"]
+git-tree-sha1 = "6cfaf56193f5bf6ac6b1b033b994ef3808c5d831"
+uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
+version = "0.1.2"
+
 [[ForwardDiff]]
 deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "InteractiveUtils", "LinearAlgebra", "NaNMath", "Random", "SparseArrays", "SpecialFunctions", "StaticArrays", "Test"]
 git-tree-sha1 = "8425a7d4e060bc2ded32d090bce910a187d6cce7"
@@ -78,12 +82,6 @@ version = "0.9.0"
 [[InteractiveUtils]]
 deps = ["LinearAlgebra", "Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-
-[[JSON]]
-deps = ["Dates", "Distributed", "Mmap", "Sockets", "Test", "Unicode"]
-git-tree-sha1 = "fec8e4d433072731466d37ed0061b3ba7f70eeb9"
-uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "0.19.0"
 
 [[JuMP]]
 deps = ["Calculus", "Compat", "ForwardDiff", "MathProgBase", "Pkg", "ReverseDiffSparse"]
@@ -97,12 +95,24 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
+[[LightXML]]
+deps = ["BinaryProvider", "Libdl", "Test"]
+git-tree-sha1 = "aeec7a341652d47bc773475a42952fa78eccd7cc"
+uuid = "9c8b4983-aa76-5018-a973-4c85ecc9e179"
+version = "0.8.0"
+
 [[LinearAlgebra]]
 deps = ["Libdl"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
+
+[[LoopThrottle]]
+deps = ["Compat"]
+git-tree-sha1 = "90a056cc8261d47828b5ee05b3a166d691660628"
+uuid = "39f5be34-8529-5463-bac7-bf6867c840a3"
+version = "0.0.3"
 
 [[Markdown]]
 deps = ["Base64"]
@@ -117,11 +127,11 @@ version = "0.7.7"
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
-[[NBInclude]]
-deps = ["Compat", "JSON", "SoftGlobalScope"]
-git-tree-sha1 = "9881dd75c83eba704798dfd7185770c29ac720f8"
-uuid = "0db19996-df87-5ea3-a455-e3a50d440464"
-version = "2.1.0"
+[[MultivariatePolynomials]]
+deps = ["LinearAlgebra", "Test"]
+git-tree-sha1 = "1d8f77292707c262acfa3659336426bbb153df50"
+uuid = "102ac46a-7ee4-5c85-9060-abc95bfdeaa3"
+version = "0.2.5"
 
 [[NaNMath]]
 deps = ["Compat"]
@@ -149,6 +159,10 @@ uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
+[[Profile]]
+deps = ["Printf"]
+uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
+
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
@@ -157,17 +171,33 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 deps = ["Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
+[[Reexport]]
+deps = ["Pkg"]
+git-tree-sha1 = "7b1d07f411bc8ddb7977ec7f377b97b158514fe0"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "0.2.0"
+
 [[ReverseDiffSparse]]
 deps = ["Calculus", "Compat", "DataStructures", "ForwardDiff", "MathProgBase", "NaNMath"]
 git-tree-sha1 = "2c445d3c0a519376c950023ac67079bb71418f9b"
 uuid = "89212889-6d3f-5f97-b412-7825138f6c9c"
 version = "0.8.4"
 
+[[RigidBodyDynamics]]
+deps = ["DocStringExtensions", "LightXML", "LinearAlgebra", "LoopThrottle", "Profile", "Random", "Reexport", "Rotations", "SparseArrays", "StaticArrays", "Test", "TypeSortedCollections"]
+git-tree-sha1 = "af90bbd4fed2017bbaaa9baed44d3eed8c4aa00c"
+repo-rev = "master"
+repo-url = "https://github.com/JuliaRobotics/RigidBodyDynamics.jl.git"
+uuid = "366cf18f-59d5-5db9-a4de-86a9f6786172"
+version = "1.1.0+"
+
 [[Rotations]]
 deps = ["LinearAlgebra", "Random", "StaticArrays", "Statistics", "Test"]
-git-tree-sha1 = "b629771d0de88979cbdbf72ceddc54de58fde149"
+git-tree-sha1 = "989dfe99ebde8aa765429ef1dcf93dc318502f38"
+repo-rev = "tk/skip-norm-one"
+repo-url = "https://github.com/FugroRoames/Rotations.jl.git"
 uuid = "6038ab10-8711-5258-84ad-4b1120ba62dc"
-version = "0.9.1"
+version = "0.9.1+"
 
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
@@ -182,12 +212,6 @@ uuid = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
 [[Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
-[[SoftGlobalScope]]
-deps = ["Test"]
-git-tree-sha1 = "97f6dfcf612b9a7260fde44170725d9ea34b1431"
-uuid = "b85f4697-e234-5449-a836-ec8e2f98b302"
-version = "1.0.7"
-
 [[SparseArrays]]
 deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
@@ -200,9 +224,9 @@ version = "0.7.2"
 
 [[StaticArrays]]
 deps = ["InteractiveUtils", "LinearAlgebra", "Random", "Statistics", "Test"]
-git-tree-sha1 = "ebc5c2a27d91d5ec611a9861168182e2168effd3"
+git-tree-sha1 = "d432c79bef174a830304f8601427a4357dfdbfb7"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "0.9.2"
+version = "0.8.3"
 
 [[Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -211,6 +235,18 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[[TrigonometricPolynomials]]
+deps = ["DynamicPolynomials", "LinearAlgebra", "Reexport"]
+path = "extras/TrigonometricPolynomials"
+uuid = "09b09426-e1f6-11e8-37bd-0b67245178a2"
+version = "0.1.0"
+
+[[TypeSortedCollections]]
+deps = ["Test"]
+git-tree-sha1 = "bc360a93d6f2f45e1313875964853f745890f143"
+uuid = "94a5cd58-49a0-5741-bd07-fa4f4be8babf"
+version = "1.0.0"
 
 [[URIParser]]
 deps = ["Test", "Unicode"]

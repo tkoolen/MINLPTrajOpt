@@ -160,6 +160,7 @@ Base.conj(p::TrigPoly) = p
 # Promotion/conversion
 Base.promote_rule(::Type{TrigPoly{T1}}, ::Type{TrigPoly{T2}}) where {T1<:Real, T2<:Real} = TrigPoly{promote_type(T1, T2)}
 Base.promote_rule(::Type{TrigPoly{T1}}, ::Type{T2}) where {T1<:Real, T2<:Real} = TrigPoly{promote_type(T1, T2)}
+Base.promote_rule(::Type{BigFloat}, ::Type{TrigPoly{T}}) where {T} = TrigPoly{promote_type(BigFloat, T)}
 
 Base.convert(::Type{TrigPoly{T}}, x::TrigPoly{T}) where {T<:Real} = x
 Base.convert(::Type{TrigPoly{T}}, x::TrigPoly) where {T<:Real} = TrigPoly{T}(x)
