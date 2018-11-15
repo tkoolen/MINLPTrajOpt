@@ -37,11 +37,10 @@ function quatconstraints(model::JuMP.Model, q::Quat{Variable}; normconstraint=tr
 
     if θmax < π / 2
         # TODO: norm constraint for the vector part?
-        for var in [x, y, z]
-            @constraint model -sin(θmax / 2) <= var <= sin(θmax / 2)
-        end
+        setlowerbound.((x, y, z), -sin(θmax / 2))
+        setupperbound.((x, y, z),  sin(θmax / 2))
         if θmax < π
-            @constraint model cos(θmax / 2) <= w
+            setlowerbound(w, cos(θmax / 2))
         end
     end
     nothing
