@@ -8,10 +8,11 @@ function sincosconstraints(model::Model, s::Variable, c::Variable; normconstrain
     end
 
     if θmax < π / 2
-        @constraint model -sin(θmax) <= s <= sin(θmax)
-        if θmax < π
-            @constraint model cos(θmax) <= c
-        end
+        setlowerbound(s, -sin(θmax))
+        setupperbound(s,  sin(θmax))
+    end
+    if θmax < π
+        setlowerbound(c, cos(θmax))
     end
     nothing
 end
@@ -39,9 +40,9 @@ function quatconstraints(model::JuMP.Model, q::Quat{Variable}; normconstraint=tr
         # TODO: norm constraint for the vector part?
         setlowerbound.((x, y, z), -sin(θmax / 2))
         setupperbound.((x, y, z),  sin(θmax / 2))
-        if θmax < π
-            setlowerbound(w, cos(θmax / 2))
-        end
+    end
+    if θmax < π
+        setlowerbound(w, cos(θmax / 2))
     end
     nothing
 end
